@@ -1,0 +1,20 @@
+<eui-crud-form
+    [dataSource]="dataSource$ | async"
+    (load)="busChange.emit($event)"
+    (save)="busChange.emit($event); busId === null && add.emit($event);"
+    (delete)="delete.emit()"
+    (cancel)="cancel.emit()">
+
+  <eui-crud-form-header>
+    <ng-content select="eui-back-button"></ng-content>
+    <span>Bus</span>
+  </eui-crud-form-header>
+
+  <eui-input-text name="name" label="Name" [required]="true"></eui-input-text>
+  <eui-dropdown name="parking_lot" label="Parking Lot" [required]="true" [displayWith]="parkingLotDisplayFn" (query)="parkingLotSuggestionsQuery$.next($event)" [suggestions]="parkingLotSuggestions$ | async"></eui-dropdown>
+  <eui-input-text name="capacity" label="Capacity" [required]="true" euiInputInt gt="0"></eui-input-text>
+  <eui-input-text name="fuel_consumption" label="Fuel Consumption" [required]="true" euiInputFuelConsumption></eui-input-text>
+  <eui-input-text name="fuel_price" label="Fuel Price" [required]="true" euiInputFuelPrice></eui-input-text>
+  <eui-input-text name="salary" label="Salary" [required]="true" euiInputPricePerHour></eui-input-text>
+
+</eui-crud-form>
